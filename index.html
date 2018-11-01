@@ -12,9 +12,9 @@
     <meta name="description" content="不超过150个字符" />
     <!-- 页面关键词 -->
     <meta name="keywords" content="" />
-    <title>付款成功</title>
-    <link rel="stylesheet" type="text/css" href="css/reset.css" />
-    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <title>向商家付款</title>
+    <link rel="stylesheet" type="text/css" href="reset.css" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
     <script>
     (function() {
         var html = document.documentElement;
@@ -23,13 +23,104 @@
     })()
     </script>
 </head>
+
 <body>
-   <section class="pay-tips">付款成功</section>
-   <p class="pay-checked">（请出示给商家）</p>
-   <div class="pay-img"><img src="image/img.png"></div>
-   <section class="sum">&yen;15</section>
-   <section class="pay-infor">商家名称：清真食堂&nbsp;&nbsp;酸辣粉</section>
-   <section class="pay-time">付款时间：2018-08-09 10:00:00</section>
-   <a href="" class="pay-btn">完成</a>
+    <div class="wrap">
+        <form action="">
+            <section class="school-name"><i class="icon"></i><span>哈尔滨职业技术学院</span></section>
+            <div class="space"></div>
+            <section class="food-name">清真食堂&nbsp;&nbsp;酸辣粉</section>
+            <section class="shuru">
+                <div class="money-warp clearfix">
+                    <span class="money-tips">消费金额</span>
+                    <div id="div" class="price money">&nbsp;</div>
+                </div>
+            </section>
+            <!--  <p>可询问工作人员应缴费用总额</p> -->
+        </form>
+        
+    </div>
+    <div class="layer-content">
+
+        <div class="form_edit clearfix">
+            <div class="nubmer" onClick="getName('1',this)" style="text-align: center;">1</div>
+            <div class="nubmer" onClick="getName('2',this)">2</div>
+            <div class="nubmer" onClick="getName('3',this)">3</div>
+            <div class="nubmer" onClick="getName('4',this)">4</div>
+            <div class="nubmer" onClick="getName('5',this)">5</div>
+            <div class="nubmer" onClick="getName('6',this)">6</div>
+            <div class="nubmer" onClick="getName('7',this)">7</div>
+            <div class="nubmer" onClick="getName('8',this)">8</div>
+            <div class="nubmer" onClick="getName('9',this)">9</div>
+            <div class="nubmer" onClick="getName('0',this)">0</div>
+            <div class="nubmer" onClick="getName('.',this)">.</div>
+            <div class="nubmer" onClick="getName('a',this)">删除</div>
+        </div>
+         <input type="submit" value="支付" class="submit" onclick="Article()" />
+    </div>
+    <script type="text/javascript" src="jquery-1.8.3.js"></script>
+    <script type="text/javascript">
+    var str = "";
+    function getName(num) {
+        if (str.indexOf('.') != -1 && num == '.') {
+            num = '';
+        }
+        if (num == "a") {
+            if (str.length > 0) {
+                str = str.substring(0, str.length - 1);
+            } else {
+                str = "";
+            }
+        } else if (str.length == 0 && num == '.') {
+            str = '0.';
+        } else {
+            str += num;
+        }
+
+        if(str.substring(0,1) == "0"&& str.substring(1,2)!="."){
+            str+=str;
+        }
+
+        if (str.indexOf('.') != -1) {
+            str += '';
+            $(".money").text("¥" + str);
+        } else {
+            $(".money").text("¥" + str );
+        };
+        if (str.substring(0, 2) == "00") {
+            str = '';
+        };
+        if (str.charAt(str.length - 1) == '.') {
+            $(".money").text("¥" + str +"0");
+        }
+
+        if (str == "") {
+            $(".money").text("¥0");
+        };
+         // $(".money").toFixed(2);
+         // obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d).*$/,'$1$2.$3'); //只能输入两个小数
+
+    };
+
+    function Article() {
+
+        if(str.length == 0){
+            $(".money").html("<span class='tips'>请输入金额!!!</span>")
+            return false
+        }
+        if(str.substring(0, 2) =='¥0'&& str.length == 2){
+           alert("123");
+        }
+        if(str.substring(0, 2) =="0."){
+             $(".money").text("¥" + str );
+        }
+        if(str.substring(0, 2) =="0."&&str.length == 2){
+            $(".money").html("<span class='tips'>请输入金额!!!</span>")
+            return false
+        }
+        console.log($(".money").text())
+    }
+    </script>
 </body>
+
 </html>
